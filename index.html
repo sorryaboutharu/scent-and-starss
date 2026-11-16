@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent & Stars · Untuk Hanna</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        mystic: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            gold: '#d4af37',
+                            lightGold: '#fef3c7',
+                            cream: '#f8fafc',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="w-full py-6 px-6 md:px-12 flex justify-between items-center border-b border-slate-800/60">
+        <div class="flex items-center space-x-2">
+            <span class="text-amber-400 text-xl">✦</span>
+            <span class="font-serif text-2xl tracking-wider text-amber-100 font-semibold">Scent & Stars</span>
+        </div>
+        <span class="text-xs tracking-widest text-slate-400 uppercase font-medium">Astrologi · Elemen · Wangi</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 max-w-4xl mx-auto w-full">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="text-center mb-16 space-y-6">
+            <h1 class="font-serif text-4xl md:text-6xl text-amber-100 font-bold leading-tight">
+                Temukan Wewangian yang Selaras <br class="hidden md:block"> dengan Zodiakmu
+            </h1>
+            <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                Rasi bintang dan elemen alam membentuk cara kita memancarkan energi, dan aroma tubuh. Temukan wewangian yang selaras dengan zodiakmu.
+            </p>
+            <div class="pt-4">
+                <a href="#quiz-section" class="inline-block px-8 py-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5">
+                    Temukan Aroma Anda
+                </a>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="w-full bg-slate-900/80 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-md">
+            <div class="text-center mb-10">
+                <h2 class="font-serif text-3xl text-amber-100 font-semibold mb-2">Kalkulator Kecocokan Wangi</h2>
+                <p class="text-slate-400 text-sm">Pilih zodiakmu dan tentukan tepat <span class="text-amber-400 font-medium">3 preferensi aroma</span> favoritmu.</p>
+            </div>
+
+            <form id="scentForm" class="space-y-8">
+                <!-- Zodiak Input -->
+                <div class="space-y-3">
+                    <label for="zodiac" class="block text-sm font-medium text-amber-200 tracking-wide uppercase">1. Pilih Zodiak (Sun Sign)</label>
+                    <select id="zodiac" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors">
+                        <option value="" disabled selected>-- Pilih Rasi Bintangmu --</option>
+                        <option value="Aries">Aries (Api)</option>
+                        <option value="Leo">Leo (Api)</option>
+                        <option value="Sagittarius">Sagittarius (Api)</option>
+                        <option value="Taurus">Taurus (Tanah)</option>
+                        <option value="Virgo">Virgo (Tanah)</option>
+                        <option value="Capricorn">Capricorn (Tanah)</option>
+                        <option value="Gemini">Gemini (Udara)</option>
+                        <option value="Libra">Libra (Udara)</option>
+                        <option value="Aquarius">Aquarius (Udara)</option>
+                        <option value="Cancer">Cancer (Air)</option>
+                        <option value="Scorpio">Scorpio (Air)</option>
+                        <option value="Pisces">Pisces (Air)</option>
+                    </select>
+                </div>
+
+                <!-- 10 Scent Options (Multi-select max 3) -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-medium text-amber-200 tracking-wide uppercase">2. Pilih TEPAT 3 Aroma Favorit</label>
+                    <p class="text-xs text-slate-400">Centang 3 kategori wangi yang paling ingin kamu kombinasikan.</p>
+                    
+                    <div id="scentCheckboxes" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                        <!-- Checkboxes will be injected via JavaScript -->
+                    </div>
+                    <p id="errorMsg" class="text-rose-400 text-xs hidden">Harap pilih tepat 3 aroma.</p>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4 text-center">
+                    <button type="submit" class="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-600/30">
+                        Analisis Profil Aromamu
+                    </button>
+                </div>
+            </form>
+
+            <!-- Result Box (Hidden by default) -->
+            <div id="resultContainer" class="hidden mt-12 pt-10 border-t border-slate-800 space-y-8 animate-fadeIn">
+                <div class="text-center space-y-2">
+                    <span class="text-xs tracking-widest text-amber-400 uppercase font-semibold">Hasil Analisis Personal</span>
+                    <h3 id="resultTitle" class="font-serif text-3xl md:text-4xl text-amber-100 font-bold"></h3>
+                    <p id="resultVibe" class="text-slate-300 text-base italic max-w-xl mx-auto"></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                    <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 space-y-3">
+                        <h4 class="text-amber-300 font-serif text-xl font-semibold flex items-center gap-2">
+                            <span>✦</span> Kombinasi Notes Terpilih
+                        </h4>
+                        <ul id="selectedScentsList" class="text-sm text-slate-300 space-y-1 list-disc list-inside"></ul>
+                    </div>
+
+                    <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 space-y-3">
+                        <h4 class="text-amber-300 font-serif text-xl font-semibold flex items-center gap-2">
+                            <span>✦</span> Rekomendasi Parfum Nyata
+                        </h4>
+                        <div id="recommendationsList" class="space-y-4 text-sm text-slate-300"></div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-6">
+                    <button id="resetBtn" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors">
+                        Ulangi Tes
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-6 text-center border-t border-slate-800/60 text-xs text-slate-500 tracking-wider">
+        Scent & Stars · dibuat untuk Hanna
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        const scentOptions = [
+            { id: "woody", label: "Woody & Earthy (Sandalwood, Cedar, Vetiver)" },
+            { id: "floral", label: "Floral & Romantic (Rose, Jasmine, Peony)" },
+            { id: "citrus", label: "Fresh & Citrus (Bergamot, Lemon, Mandarin)" },
+            { id: "spicy", label: "Warm & Spicy (Cinnamon, Pepper, Cardamom)" },
+            { id: "sweet", label: "Sweet & Gourmand (Vanilla, Tonka Bean, Caramel)" },
+            { id: "aquatic", label: "Clean & Aquatic (Sea Salt, Marine, Water Lily)" },
+            { id: "fruity", label: "Juicy & Fruity (Pear, Peach, Blackcurrant)" },
+            { id: "green", label: "Crisp & Green (Green Tea, Fig Leaf, Basil)" },
+            { id: "powdery", label: "Soft & Powdery (Iris, White Musk, Violet)" },
+            { id: "smoky", label: "Deep & Smoky (Oud, Incense, Leather)" }
+        ];
+
+        const zodiacDatabase = {
+            "Aries": { element: "Fire", vibe: "Bersemangat, berani, memikat, dan penuh energi membara" },
+            "Leo": { element: "Fire", vibe: "Karismatik, hangat, penuh percaya diri, dan memancarkan kemewahan" },
+            "Sagittarius": { element: "Fire", vibe: "Berjiwa bebas, ekspresif, menyukai petualangan dan kehangatan eksotis" },
+            "Taurus": { element: "Earth", vibe: "Sensual, membumi, elegan, menyukai kenyamanan dan ketenangan abadi" },
+            "Virgo": { element: "Earth", vibe: "Bersih, terstruktur, natural, tenang, dan memiliki detail rasa yang tinggi" },
+            "Capricorn": { element: "Earth", vibe: "Matang, berwibawa, kuat, dan menyukai aroma kayu yang berkarakter" },
+            "Gemini": { element: "Air", vibe: "Dinamis, ringan, interaktif, segar, dan selalu membawa energi baru" },
+            "Libra": { element: "Air", vibe: "Harmonis, menyukai keindahan artistik, seimbang, dan elegan" },
+            "Aquarius": { element: "Air", vibe: "Unik, visioner, segar, tidak biasa, dan memiliki pesona modern" },
+            "Cancer": { element: "Water", vibe: "Intuitif, emosional yang mendalam, lembut, dan penuh kehangatan intim" },
+            "Scorpio": { element: "Water", vibe: "Misterius, intens, memikat secara emosional, dan sangat dalam" },
+            "Pisces": { element: "Water", vibe: "Puitis, penuh imajinasi, menenangkan, seperti hembusan angin laut yang syahdu" }
+        };
+
+        const elementRecommendations = {
+            "Fire": [
+                { name: "Maison Francis Kurkdjian Baccarat Rouge 540", description: "Memancarkan aura hangat, mewah, dan berani yang menyatu sempurna dengan karakter api." },
+                { name: "Tom Ford Lost Cherry", description: "Manis menggoda dengan sentuhan tajam yang berkarakter kuat dan memikat." }
+            ],
+            "Earth": [
+                { name: "Le Labo Santal 33", description: "Aroma kayu yang hangat, memberikan rasa tenang, elegan, dan membumi." },
+                { name: "Byredo Mojave Ghost", description: "Elegan, natural, dan menyatu selaras dengan kehangatan kulit." }
+            ],
+            "Air": [
+                { name: "Jo Malone English Pear & Freesia", description: "Segar, renyah, dan ringan di hidung—mewakili pikiran yang segar dan bebas." },
+                { name: "Diptyque Philosykos", description: "Aroma daun pohon ara yang hijau, sejuk, dan merangsang kreativitas." }
+            ],
+            "Water": [
+                { name: "Jo Malone Wood Sage & Sea Salt", description: "Menenangkan pikiran, terasa seperti hembusan angin laut yang misterius dan intim." },
+                { name: "Maison Margiela Replica Lazy Sunday Morning", description: "Lembut, intim, bersih, dan menenangkan pikiran." }
+            ]
+        };
+
+        // Render Checkboxes
+        const container = document.getElementById('scentCheckboxes');
+        scentOptions.forEach(opt => {
+            const label = document.createElement('label');
+            label.className = "flex items-center space-x-3 p-3 bg-slate-950 border border-slate-800 rounded-xl hover:border-amber-500/50 cursor-pointer transition-colors";
+            label.innerHTML = `
+                <input type="checkbox" name="scents" value="${opt.id}" data-label="${opt.label}" class="w-4 h-4 text-amber-500 bg-slate-900 border-slate-700 rounded focus:ring-amber-500">
+                <span class="text-sm text-slate-300">${opt.label}</span>
+            `;
+            container.appendChild(label);
+        });
+
+        // Validation limit to exactly 3 checkboxes
+        const checkboxes = document.querySelectorAll('input[name="scents"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                const checkedCount = document.querySelectorAll('input[name="scents"]:checked').length;
+                const errorMsg = document.getElementById('errorMsg');
+                if (checkedCount > 3) {
+                    cb.checked = false;
+                    errorMsg.textContent = "Maksimal hanya bisa memilih 3 aroma.";
+                    errorMsg.classList.remove('hidden');
+                } else {
+                    errorMsg.classList.add('hidden');
+                }
+            });
+        });
+
+        // Form Submit Handler
+        document.getElementById('scentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const selectedZodiac = document.getElementById('zodiac').value;
+            const checkedScents = document.querySelectorAll('input[name="scents"]:checked');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (!selectedZodiac) {
+                alert('Silakan pilih zodiak terlebih dahulu.');
+                return;
+            }
+
+            if (checkedScents.length !== 3) {
+                errorMsg.textContent = "Kamu harus memilih tepat 3 aroma favorit!";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            errorMsg.classList.add('hidden');
+
+            // Process Data
+            const zodiacData = zodiacDatabase[selectedZodiac];
+            const recommendations = elementRecommendations[zodiacData.element];
+
+            document.getElementById('resultTitle').textContent = `Profil ${selectedZodiac} & Kombinasi Wangi`;
+            document.getElementById('resultVibe').textContent = `Karakter Elemen: "${zodiacData.vibe}"`;
+
+            // Populate selected scents list
+            const scentListEl = document.getElementById('selectedScentsList');
+            scentListEl.innerHTML = '';
+            checkedScents.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.getAttribute('data-label');
+                scentListEl.appendChild(li);
+            });
+
+            // Populate recommendations
+            const recListEl = document.getElementById('recommendationsList');
+            recListEl.innerHTML = '';
+            recommendations.forEach(rec => {
+                const div = document.createElement('div');
+                div.className = "border-l-2 border-amber-500/60 pl-4 space-y-1";
+                div.innerHTML = `
+                    <p class="font-semibold text-amber-200">${rec.name}</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">${rec.description}</p>
+                `;
+                recListEl.appendChild(div);
+            });
+
+            // Show result & scroll smoothly
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.classList.remove('hidden');
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Reset button
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            document.getElementById('scentForm').reset();
+            document.getElementById('resultContainer').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
